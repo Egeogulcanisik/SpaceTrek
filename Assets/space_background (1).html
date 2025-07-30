@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Açık Uzay Arkaplanı</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: linear-gradient(135deg, 
+                #e6f3ff 0%,    /* Açık mavi */
+                #cce7ff 15%,   /* Hafif mavi */
+                #b3daff 30%,   /* Açık gökyüzü mavisi */
+                #99ccff 45%,   /* Yumuşak mavi */
+                #80bfff 60%,   /* Orta mavi */
+                #66b3ff 75%,   /* Derin mavi */
+                #4da6ff 90%,   /* Koyu mavi */
+                #3399ff 100%   /* En koyu mavi */
+            );
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        /* Parlak nebula bulutları */
+        .nebula-cloud {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.3;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .nebula-1 {
+            width: 300px;
+            height: 200px;
+            background: radial-gradient(ellipse, #ff9ff3, #f368e0, transparent);
+            top: 10%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+
+        .nebula-2 {
+            width: 250px;
+            height: 180px;
+            background: radial-gradient(ellipse, #74c0fc, #339af0, transparent);
+            top: 30%;
+            right: 20%;
+            animation-delay: -7s;
+        }
+
+        .nebula-3 {
+            width: 200px;
+            height: 150px;
+            background: radial-gradient(ellipse, #8ce99a, #51cf66, transparent);
+            bottom: 25%;
+            left: 25%;
+            animation-delay: -14s;
+        }
+
+        .nebula-4 {
+            width: 180px;
+            height: 120px;
+            background: radial-gradient(ellipse, #ffd43b, #fab005, transparent);
+            bottom: 15%;
+            right: 15%;
+            animation-delay: -3s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(20px, -15px) scale(1.1); }
+            50% { transform: translate(-10px, -25px) scale(0.9); }
+            75% { transform: translate(-25px, 10px) scale(1.05); }
+        }
+
+        /* Parlak yıldızlar */
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        .star.bright {
+            box-shadow: 0 0 15px rgba(255, 255, 255, 1), 0 0 25px rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Distant planets/moons */
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+
+        .planet-1 {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #e599f7, #d0bfff);
+            top: 20%;
+            right: 10%;
+            box-shadow: inset -10px -10px 20px rgba(0, 0, 0, 0.1);
+            animation: planetRotate 30s infinite linear;
+        }
+
+        .planet-2 {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #96f2d7, #63e6be);
+            bottom: 30%;
+            left: 8%;
+            box-shadow: inset -8px -8px 15px rgba(0, 0, 0, 0.1);
+            animation: planetRotate 25s infinite linear reverse;
+        }
+
+        .planet-3 {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #ffec99, #ffd43b);
+            top: 60%;
+            left: 70%;
+            box-shadow: inset -5px -5px 10px rgba(0, 0, 0, 0.1);
+            animation: planetRotate 20s infinite linear;
+        }
+
+        @keyframes planetRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Işık parçacıkları */
+        .light-particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: drift 15s infinite ease-in-out;
+        }
+
+        @keyframes drift {
+            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-100px) translateX(50px); opacity: 0; }
+        }
+
+        /* Uzak galaksi spiral */
+        .galaxy {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            top: 15%;
+            left: 60%;
+            opacity: 0.2;
+            background: radial-gradient(ellipse, 
+                transparent 20%, 
+                rgba(255, 255, 255, 0.1) 30%, 
+                rgba(138, 43, 226, 0.2) 50%, 
+                transparent 70%
+            );
+            border-radius: 50%;
+            animation: galaxyRotate 60s infinite linear;
+        }
+
+        @keyframes galaxyRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Shooting stars */
+        .shooting-star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px white;
+        }
+
+        .shooting-star::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 30px;
+            height: 1px;
+            background: linear-gradient(90deg, white, transparent);
+            transform-origin: left center;
+        }
+
+        .shooting-star.animate {
+            animation: shoot 3s ease-out;
+        }
+
+        @keyframes shoot {
+            0% { 
+                transform: translateX(-100px) translateY(-100px);
+                opacity: 1;
+            }
+            70% { opacity: 1; }
+            100% { 
+                transform: translateX(300px) translateY(300px);
+                opacity: 0;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <!-- Ana gradient arkaplan otomatik -->
+    
+    <!-- Nebula bulutları -->
+    <div class="nebula-cloud nebula-1"></div>
+    <div class="nebula-cloud nebula-2"></div>
+    <div class="nebula-cloud nebula-3"></div>
+    <div class="nebula-cloud nebula-4"></div>
+    
+    <!-- Uzak galaksi -->
+    <div class="galaxy"></div>
+    
+    <!-- Gezegenler -->
+    <div class="planet planet-1"></div>
+    <div class="planet planet-2"></div>
+    <div class="planet planet-3"></div>
+    
+    <!-- Yıldızlar container -->
+    <div id="stars-container"></div>
+    
+    <!-- Işık parçacıkları container -->
+    <div id="particles-container"></div>
+    
+
+
+    <script>
+        // Yıldızları oluştur
+        function createStars() {
+            const container = document.getElementById('stars-container');
+            
+            for (let i = 0; i < 80; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                // Bazı yıldızları daha parlak yap
+                if (Math.random() > 0.8) {
+                    star.classList.add('bright');
+                }
+                
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 3 + 's';
+                
+                container.appendChild(star);
+            }
+        }
+
+        // Işık parçacıkları oluştur
+        function createLightParticles() {
+            const container = document.getElementById('particles-container');
+            
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'light-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                
+                container.appendChild(particle);
+            }
+        }
+
+        // Kayan yıldız oluştur
+        function createShootingStar() {
+            const star = document.createElement('div');
+            star.className = 'shooting-star';
+            
+            // Rastgele başlangıç pozisyonu
+            star.style.left = Math.random() * 50 + '%';
+            star.style.top = Math.random() * 50 + '%';
+            
+            document.body.appendChild(star);
+            
+            // Animasyonu başlat
+            setTimeout(() => {
+                star.classList.add('animate');
+            }, 100);
+            
+            // 3 saniye sonra kaldır
+            setTimeout(() => {
+                if (star.parentNode) {
+                    star.parentNode.removeChild(star);
+                }
+            }, 3000);
+        }
+
+        // Periyodik kayan yıldız
+        function startShootingStars() {
+            setInterval(() => {
+                if (Math.random() > 0.7) { // %30 şans
+                    createShootingStar();
+                }
+            }, 2000);
+        }
+
+        // Başlatma
+        window.addEventListener('load', () => {
+            createStars();
+            createLightParticles();
+            startShootingStars();
+            
+            console.log('Açık uzay arkaplanı hazır! 🌌');
+        });
+    </script>
+</body>
+</html>
