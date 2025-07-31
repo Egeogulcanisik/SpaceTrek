@@ -18,3 +18,11 @@
 *.mdb
 *.opendb
 *.VC.db
+
+# IDE folders (Rider / Visual Studio)
+.vs/
+.idea/
+*.csproj
+*.sln
+*.DotSettings.user
+
